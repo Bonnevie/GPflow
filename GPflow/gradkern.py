@@ -185,7 +185,7 @@ class StationaryHessianKernel(StationaryGradKernel):
         self.lengthscales = GPflow.param.Param(1.*np.ones(input_dim-1), transforms.positive)
         self.tril_indices = np.column_stack(np.tril_indices(ndim))
         self.derivative_base = [lambda tau: self.variance*tf.exp(-0.5*tau), lambda tau: -0.5*self.variance*tf.exp(-0.5*tau), lambda tau: 0.25*self.variance*tf.exp(-0.5*tau),
-        lambda tau: -0.125*self.variance*tf.exp(-0.5*tau), lambda tau: 0.0625*self.variance*(-0.5*tau)]
+        lambda tau: -0.125*self.variance*tf.exp(-0.5*tau), lambda tau: 0.0625*self.variance*tf.exp(-0.5*tau)]
         #self.derivative_base = [lambda tau: self.variance*(-0.5)**n*tf.exp(-0.5*tau) for n in range(5)]
         self.kerns = [[self._kernel_factory(i,j) for j in range(groups)] for i in range(groups)]
 
